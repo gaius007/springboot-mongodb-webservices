@@ -1,0 +1,29 @@
+package com.devcaio.springbootmongodb.resources.exception;
+
+import java.time.Instant;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import com.devcaio.springbootmongodb.services.exception.ObjectNotFoundException;
+import com.devcaio.springbootmongodb.resources.StandardError;
+
+
+import jakarta.servlet.http.HttpServletRequest;
+
+@ControllerAdvice
+public class ResourceExceptionHandler {
+	
+	@ExceptionHandler(ObjectNotFoundException.class)
+	public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundException e, HttpServletRequest request) {
+		
+		HttpStatus status = HttpStatus.NOT_FOUND;
+		
+		StandardError error = new StandardError(Instant.ofEpochMilli(System.currentTimeMillis()), status.value(), "Not Found", e.getMessage(), request.getRequestURI());
+		
+		return ResponseEntity.status(status).body(error);
+	}
+
+}
