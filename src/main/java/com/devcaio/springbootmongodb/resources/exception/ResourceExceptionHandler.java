@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.devcaio.springbootmongodb.services.exception.ObjectNotFoundException;
-import com.devcaio.springbootmongodb.resources.StandardError;
-
 
 import jakarta.servlet.http.HttpServletRequest;
 
